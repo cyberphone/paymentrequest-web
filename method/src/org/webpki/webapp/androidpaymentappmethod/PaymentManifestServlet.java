@@ -17,11 +17,9 @@
 package org.webpki.webapp.androidpaymentappmethod;
 
 import java.io.IOException;
-
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +34,8 @@ public class PaymentManifestServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws IOException, ServletException {
         logger.info("GET");
+  //      response.setHeader("Expires", PaymentAppMethodService.whenItAllEnds);
+        response.setHeader("ETag", PaymentAppMethodService.eTag);
         response.setContentType("application/manifest+json");
         response.getOutputStream().write(PaymentAppMethodService.paymentManifest);
     }

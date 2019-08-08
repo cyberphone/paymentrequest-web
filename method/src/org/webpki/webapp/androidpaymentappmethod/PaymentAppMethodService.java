@@ -17,7 +17,7 @@
 package org.webpki.webapp.androidpaymentappmethod;
 
 import java.io.IOException;
-
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,12 +26,9 @@ import javax.servlet.ServletContextListener;
 
 import org.webpki.crypto.CertificateUtil;
 import org.webpki.crypto.HashAlgorithms;
-
 import org.webpki.json.JSONObjectWriter;
 import org.webpki.json.JSONOutputFormats;
-
 import org.webpki.util.ArrayUtil;
-
 import org.webpki.webutil.InitPropertyReader;
 
 public class PaymentAppMethodService extends InitPropertyReader implements ServletContextListener {
@@ -42,11 +39,11 @@ public class PaymentAppMethodService extends InitPropertyReader implements Servl
     
     static final String HOST_PATH                    = "host_path";
 
-    static byte[] appMmanifestData;
-    
-    static long whenItAllBegan;
+    static String whenItAllEnds;
     
     static byte[] paymentManifest;
+    
+    static String eTag;
     
 
     byte[] getBinary(String name) throws IOException {
@@ -61,11 +58,13 @@ public class PaymentAppMethodService extends InitPropertyReader implements Servl
     public void contextInitialized(ServletContextEvent sce) {
         initProperties (sce);
         try {
-            whenItAllBegan = System.currentTimeMillis();
+            whenItAllEnds = new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 364 * 5).toString();
             
             byte[] certificate = getBinary(SIGNER_CERTIFICATE);
 
             JSONObjectWriter temp = new JSONObjectWriter();
+            temp.setArray("default_applications")
+                .setString(getPropertyString(HOST_PATH) + "/payment-manifest.json");
             temp.setArray("related_applications").setObject()
                 .setString("platform", "play")
                 .setString("id", "org.webpki.androidpay")
@@ -79,14 +78,12 @@ public class PaymentAppMethodService extends InitPropertyReader implements Servl
                                                          -1,
                                                          true,
                                                          ':'));
-            appMmanifestData = temp.serializeToBytes(JSONOutputFormats.NORMALIZED);
-
-            temp = new JSONObjectWriter();
-            temp.setArray("default_applications")
-                    .setString(getPropertyString(HOST_PATH) + "/app-manifest.json");
+            temp.setString("supported_origins", "*");
             paymentManifest = temp.serializeToBytes(JSONOutputFormats.NORMALIZED);
+            
+            eTag = "13455";
 
-            logger.info("Saturn Android Payment App Method Authority initiated\nSubject=" +
+            logger.info("W3C/Android Payment App Method initiated\nSubject=" +
                     CertificateUtil.getCertificateFromBlob(certificate).getSubjectDN());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "********\n" + e.getMessage() + "\n********", e);

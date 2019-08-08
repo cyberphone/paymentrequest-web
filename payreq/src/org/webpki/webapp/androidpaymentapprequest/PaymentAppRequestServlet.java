@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.webpki.webapp.androidpaymentappmethod;
+package org.webpki.webapp.androidpaymentapprequest;
 
 import java.io.IOException;
 
@@ -26,18 +26,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AppManifestServlet extends HttpServlet {
+import org.webpki.json.JSONOutputFormats;
+import org.webpki.json.JSONParser;
+
+public class PaymentAppRequestServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    
-    static Logger logger = Logger.getLogger(AppManifestServlet.class.getCanonicalName());
+
+    static Logger logger = Logger.getLogger(PaymentAppRequestServlet.class.getCanonicalName());
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
-    throws IOException, ServletException {
+            throws IOException, ServletException {
         logger.info("GET");
-        response.setContentType("application/manifest+json");
-        response.setContentLength(PaymentAppMethodService.appMmanifestData.length);
-        response.getOutputStream().write(PaymentAppMethodService.appMmanifestData);
+        response.setContentType("text/plain");
     }
 }

@@ -42,14 +42,14 @@ public class PaymentAppMethodServlet extends HttpServlet {
         response.setContentType("text/plain");
         response.getOutputStream().write(
             JSONParser.parse(
-                PaymentAppMethodService.appMmanifestData).serializeToBytes(JSONOutputFormats.PRETTY_PRINT));
+                PaymentAppMethodService.paymentManifest).serializeToBytes(JSONOutputFormats.PRETTY_PRINT));
     }
 
     @Override
     public void doHead(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException {
         logger.info("HEAD");
+        response.setHeader("ETag", PaymentAppMethodService.eTag);
         response.setHeader("Link", "<payment-manifest.json>; rel=\"payment-method-manifest\"");
-        response.setDateHeader("Last-Modified", PaymentAppMethodService.whenItAllBegan);
     }
 }
