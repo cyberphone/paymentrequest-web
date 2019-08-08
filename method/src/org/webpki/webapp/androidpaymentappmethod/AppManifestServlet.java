@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.webpki.webapp.androidpaymentappauthority;
+package org.webpki.webapp.androidpaymentappmethod;
 
 import java.io.IOException;
 
@@ -37,7 +37,7 @@ public class AppManifestServlet extends HttpServlet {
     throws IOException, ServletException {
         logger.info("GET");
         response.setContentType("application/manifest+json");
-        response.setContentLength(PaymentAppAuthorityService.appMmanifestData.length);
-        response.getOutputStream().write(PaymentAppAuthorityService.appMmanifestData);
+        response.setContentLength(PaymentAppMethodService.appMmanifestData.length);
+        response.getOutputStream().write(PaymentAppMethodService.appMmanifestData);
     }
 }

@@ -1,15 +1,14 @@
 <project name="W3C PaymentRequest/Android Authority" default="help">
 
   <!-- set properties for this build -->
-  <property file="androidpaymentappauthority.properties"/>
+  <property file="androidpaymentappmethod.properties"/>
   <property name="openkeystore.dir" location="${openkeystore}"/>
   <property name="src.dir" value="src"/>
   <property name="temp.dir" value=".tmp"/>
   <property name="dist.dir" value="dist"/>
-  <property name="class_war_path" value="WEB-INF/classes/org/webpki/webapp/androidpaymentappauthority"/>
+  <property name="class_war_path" value="WEB-INF/classes/org/webpki/webapp/androidpaymentappmethod"/>
   
-  <property name="appcorename" value="paymentrequest"/>
-  <property name="application" value="${appcorename}.war"/>
+   <property name="application" value="${@methodpath}.war"/>
   
   <property name="webpki.lib.dir" location="${openkeystore.dir}/library/dist"/>
   <property name="zip.webpki.lib.dir" location="${webpki.lib.dir}"/>
@@ -65,7 +64,7 @@
 		</classpath>
     </javac>
     <replace file="${temp.dir}/web.xml">
-      <replacefilter token="@host-path@" value="${@authorityhost}/${@authoritypath}"/>
+      <replacefilter token="@host-path@" value="${@methodhost}/${@methodpath}"/>
     </replace>
     <war destfile="${dist.dir}/${application}" webxml="${temp.dir}/web.xml">
       <classes dir="${temp.dir}">

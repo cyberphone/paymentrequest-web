@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.webpki.webapp.androidpaymentappauthority;
+package org.webpki.webapp.androidpaymentappmethod;
 
 import java.io.IOException;
 
@@ -29,11 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.webpki.json.JSONOutputFormats;
 import org.webpki.json.JSONParser;
 
-public class PaymentAppAuthorityServlet extends HttpServlet {
+public class PaymentAppMethodServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    static Logger logger = Logger.getLogger(PaymentAppAuthorityServlet.class.getCanonicalName());
+    static Logger logger = Logger.getLogger(PaymentAppMethodServlet.class.getCanonicalName());
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -42,7 +42,7 @@ public class PaymentAppAuthorityServlet extends HttpServlet {
         response.setContentType("text/plain");
         response.getOutputStream().write(
             JSONParser.parse(
-                PaymentAppAuthorityService.appMmanifestData).serializeToBytes(JSONOutputFormats.PRETTY_PRINT));
+                PaymentAppMethodService.appMmanifestData).serializeToBytes(JSONOutputFormats.PRETTY_PRINT));
     }
 
     @Override
@@ -50,6 +50,6 @@ public class PaymentAppAuthorityServlet extends HttpServlet {
             throws IOException, ServletException {
         logger.info("HEAD");
         response.setHeader("Link", "<payment-manifest.json>; rel=\"payment-method-manifest\"");
-        response.setDateHeader("Last-Modified", PaymentAppAuthorityService.whenItAllBegan);
+        response.setDateHeader("Last-Modified", PaymentAppMethodService.whenItAllBegan);
     }
 }

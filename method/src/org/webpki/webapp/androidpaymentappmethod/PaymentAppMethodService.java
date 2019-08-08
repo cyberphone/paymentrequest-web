@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.webpki.webapp.androidpaymentappauthority;
+package org.webpki.webapp.androidpaymentappmethod;
 
 import java.io.IOException;
 
@@ -34,9 +34,9 @@ import org.webpki.util.ArrayUtil;
 
 import org.webpki.webutil.InitPropertyReader;
 
-public class PaymentAppAuthorityService extends InitPropertyReader implements ServletContextListener {
+public class PaymentAppMethodService extends InitPropertyReader implements ServletContextListener {
 
-    static Logger logger = Logger.getLogger(PaymentAppAuthorityService.class.getCanonicalName());
+    static Logger logger = Logger.getLogger(PaymentAppMethodService.class.getCanonicalName());
     
     static final String SIGNER_CERTIFICATE           = "signer-certificate.cer";
     
@@ -82,7 +82,7 @@ public class PaymentAppAuthorityService extends InitPropertyReader implements Se
                     .setString(getPropertyString(HOST_PATH) + "/app-manifest.json");
             paymentManifest = temp.serializeToBytes(JSONOutputFormats.NORMALIZED);
 
-            logger.info("Saturn Android Payment App Authority initiated\nSubject=" +
+            logger.info("Saturn Android Payment App Method Authority initiated\nSubject=" +
                     CertificateUtil.getCertificateFromBlob(certificate).getSubjectDN());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "********\n" + e.getMessage() + "\n********", e);

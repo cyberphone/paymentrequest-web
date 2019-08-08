@@ -11,27 +11,27 @@
     </context-param>
 
     <listener>
-        <listener-class>org.webpki.webapp.androidpaymentappauthority.PaymentAppAuthorityService</listener-class>
+        <listener-class>org.webpki.webapp.androidpaymentappmethod.PaymentAppMethodService</listener-class>
     </listener>
 
     <servlet>
-        <servlet-name>PaymentAppAuthorityServlet</servlet-name>
-        <servlet-class>org.webpki.webapp.androidpaymentappauthority.PaymentAppAuthorityServlet</servlet-class>
+        <servlet-name>PaymentAppMethodServlet</servlet-name>
+        <servlet-class>org.webpki.webapp.androidpaymentappmethod.PaymentAppMethodServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>PaymentManifestServlet</servlet-name>
-        <servlet-class>org.webpki.webapp.androidpaymentappauthority.PaymentManifestServlet</servlet-class>
+        <servlet-class>org.webpki.webapp.androidpaymentappmethod.PaymentManifestServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>AppManifestServlet</servlet-name>
-        <servlet-class>org.webpki.webapp.androidpaymentappauthority.AppManifestServlet</servlet-class>
+        <servlet-class>org.webpki.webapp.androidpaymentappmethod.AppManifestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>PaymentAppAuthorityServlet</servlet-name>
-        <url-pattern>/authority</url-pattern>
+        <servlet-name>PaymentAppMethodServlet</servlet-name>
+        <url-pattern>/method</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
