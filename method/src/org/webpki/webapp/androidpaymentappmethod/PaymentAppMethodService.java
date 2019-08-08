@@ -66,15 +66,19 @@ public class PaymentAppMethodService extends InitPropertyReader implements Servl
             byte[] certificate = getBinary(SIGNER_CERTIFICATE);
 
             JSONObjectWriter temp = new JSONObjectWriter();
-            temp.setArray("fingerprints")
-                    .setObject(new JSONObjectWriter()
+            temp.setArray("related_applications").setObject()
+                .setString("platform", "play")
+                .setString("id", "org.webpki.androidpay")
+                .setString("min_version", "1")
+                .setArray("fingerprints")
+                    .setObject()
                         .setString("type", "sha256_cert")
                         .setString("value",
                                    ArrayUtil.toHexString(HashAlgorithms.SHA256.digest(certificate),
                                                          0,
                                                          -1,
                                                          true,
-                                                         ':')));
+                                                         ':'));
             appMmanifestData = temp.serializeToBytes(JSONOutputFormats.NORMALIZED);
 
             temp = new JSONObjectWriter();

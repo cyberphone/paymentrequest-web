@@ -1,4 +1,4 @@
-<project name="W3C PaymentRequest/Android Authority" default="help">
+<project name="W3C PaymentRequest/Android Method" default="help">
 
   <!-- set properties for this build -->
   <property file="androidpaymentappmethod.properties"/>
@@ -8,7 +8,7 @@
   <property name="dist.dir" value="dist"/>
   <property name="class_war_path" value="WEB-INF/classes/org/webpki/webapp/androidpaymentappmethod"/>
   
-   <property name="application" value="${@methodpath}.war"/>
+  <property name="application" value="${@methodpath}.war"/>
   
   <property name="webpki.lib.dir" location="${openkeystore.dir}/library/dist"/>
   <property name="zip.webpki.lib.dir" location="${webpki.lib.dir}"/>
