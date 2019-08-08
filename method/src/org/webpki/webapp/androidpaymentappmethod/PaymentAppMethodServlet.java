@@ -49,7 +49,6 @@ public class PaymentAppMethodServlet extends HttpServlet {
     public void doHead(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException {
         logger.info("HEAD");
-        response.setHeader("ETag", PaymentAppMethodService.eTag);
         response.setHeader("Link", "<payment-manifest.json>; rel=\"payment-method-manifest\"");
     }
 }
